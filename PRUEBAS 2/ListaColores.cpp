@@ -13,10 +13,12 @@ void color(int c) {
 main(){
 	
 	//Los 16 Colores de texto disponisbles (Sin cambiar el fondo)
-	for(int i=0; i<=15; i++){
+	for(int i=0; i<=256; i++){
 		color(i);
 		printf("%d Hola\n",i);
 	}
+	
+	//Solo cambie el numero para probar el commiteo
 
 	getch();
 }
