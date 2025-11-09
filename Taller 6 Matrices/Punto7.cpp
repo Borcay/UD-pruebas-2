@@ -14,5 +14,37 @@ void color(int c) {
 }
 
 main(){
-	printf("blabla");
+	color(15);
+	int dim;
+	
+	printf("Ingrese el tamano de la matriz cuadrada: ");
+	scanf("%d",&dim);
+	
+	int A[dim][dim];
+	
+	for(int i=0; i<dim; i++){
+		for(int j=0; j<dim; j++){
+			A[i][j]=0;
+			
+			//Diagonal principal
+			if(i==j){ 
+				A[i][j]=i+1;
+			}
+		}
+	}
+	
+	for(int i=0; i<dim; i++){
+		
+		for(int j=0; j<dim; j++){
+			
+			color(12); //Rojo
+			if(i==j){
+				color(10); //Verde
+			}
+			printf("%d ", A[i][j]);
+		}
+		printf("\n");
+	}
+	
+	color(15);
 }
