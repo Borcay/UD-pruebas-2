@@ -26,8 +26,8 @@ main(){
 	
 	int A[n_filas][n_filas];
 	
-	volver:
-	color(15);
+	label_volver:
+	color(3);
 	printf("\nIngrese la opcion que desea visualizar\n");
 	printf("\n1. Todos 1");
 	printf("\n2. Todos 0");
@@ -37,31 +37,62 @@ main(){
 
 	switch(opcion){
 		case 1:
+			color(15);
 			for(int i=0; i<n_filas; i++){
 				for(int j=0; j<n_filas; j++){
 					printf("1 ");
 				}
 				printf("\n");
 			}
+			goto label_volver;
 		break;
 
 		case 2:
+			color(15);
 			for(int i=0; i<n_filas; i++){
 				for(int j=0; j<n_filas; j++){
 					printf("0 ");
 				}
 				printf("\n");
 			}
+			goto label_volver;
 		break;
 		
 		case 3:
-			printf("nya");
+			//Diagonal principal
+			color(10);
+			printf("Diagonal principal\n");
+			for(int i=0; i<n_filas; i++){
+				for(int j=0; j<n_filas; j++){
+					color(15);
+					if(i==j){
+						color(10);
+					}
+					printf("a ");
+				}
+				printf("\n");
+			}
+			
+			//Diagonal secundaria
+			color(12);
+			printf("Diagonal secundaria\n");
+			for(int i=0; i<n_filas; i++){
+				for(int j=0; j<n_filas; j++){
+					color(15);
+					if(i+j==n_filas-1){
+						color(12);
+					}
+					printf("a ");
+				}
+				printf("\n");
+			}
+			goto label_volver;
 		break;
 		
 		default:
 			color(12);
 			printf("La opcion ingresada no es valida, ingrese otra opcion");
-			goto volver;
+			goto label_volver;
 		break;
 	}
 	

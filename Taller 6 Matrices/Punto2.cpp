@@ -74,17 +74,16 @@ main(){
 			}	
 		}
 	}
-	printf("\n");
 	color(13);
 	
 	//Mostrar la matriz producto
+	printf("Matriz producto de las matrices A y B:\n");
 	for(int i=0; i<dim; i++){
 		for(int j=0; j<dim; j++){
 			printf("%3d ",C[i][j]);
 		}
 		printf("\n");
 	}
-	
 	
 	color(15);
 }
