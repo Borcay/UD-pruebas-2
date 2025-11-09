@@ -13,7 +13,7 @@ void color(int c) {
 main(){
 	
 	//Los 16 Colores de texto disponisbles (Sin cambiar el fondo)
-	for(int i=0; i<=256; i++){
+	for(int i=0; i<=16; i++){
 		color(i);
 		printf("%d Hola\n",i);
 	}

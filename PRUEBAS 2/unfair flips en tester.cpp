@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <conio.h>
-#include <stdlib.h>
+#include <stdlib.h> //Para el srand
 #include <time.h>
 #include <windows.h>
 #include <math.h>
