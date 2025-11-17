@@ -27,4 +27,5 @@ main(){
 	
 	printf("\n\n");
 	printf("Tu nueva version es: x.%d.%d",dos_cifras,una_cifra);
+	getch();
 }
