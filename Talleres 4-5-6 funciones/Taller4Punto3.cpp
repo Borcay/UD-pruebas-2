@@ -7,15 +7,29 @@ números impares entre el menor y el mayor de los números leídos.
 #include <stdio.h>
 #include <conio.h>
 
-main(){
+//3 Funciones
+int scanfear(){
+	int n;
+	scanf("%d",&n);
+	return n;
+}
+void printf_final(int menor, int mayor){
+	for(int i=menor+1; i<mayor; i++){
+		if (i%2 != 0){
+			printf("%d ",i);
+		}
+	}
+}
+
+void programa(){
 	int a,b;
-	int menor=0;
-	int mayor=0;
+	int menor;
+	int mayor;
 	
 	printf("Ingrese el primer numero entero positivo: ");
-	scanf("%d",&a);
+	a=scanfear();
 	printf("Ingrese el segundo numero entero positivo: ");
-	scanf("%d",&b);
+	b=scanfear();
 	
 	if(a>b){
 		mayor=a;
@@ -29,20 +43,17 @@ main(){
 	
 	if(mayor==(menor+1)){
 		printf("No hay numeros impares entre estos numeros");
-		return 0;
 	}
 	
-	if(mayor==(menor+2) && mayor%2 != 0 && mayor%2 != 0){
+	if(mayor==(menor+2) && mayor%2 != 0){
 		printf("No hay numeros impares entre estos numeros");
-		return 0;
-		
 	}
 	
-	for(int i=menor+1; i<mayor; i++){
-		
-		if (i%2 != 0){
-			printf("%d ",i);
-		}
-	}
-	getch();
+	printf_final(menor,mayor);
 }
+
+main(){
+	programa();
+}
+
+
