@@ -1,69 +1,68 @@
 //Santiago Hernandez Diaz 20252578001
-/*
-9. Diseñe un algoritmo que permita guardar en un arreglo las sumas de las filas de una matriz.
-*/
+//9. Diseñe un algoritmo que permita guardar en un arreglo las sumas de las filas de una matriz.
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
-
-//funcion para cambiar color del texto
+//Funcion para cambiar color del texto (no cuenta para las 3)
 void color(int c) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
-
-main(){
-	int n_filas;
-	int n_columnas;
-	
+//3 Funciones
+int tomar_dimensiones(const char *palabra){
 	color(15);
-	printf("Ingrese el tamano de las filas de la matriz: ");
-	scanf("%d",&n_filas);
-	printf("Ingrese el tamano de las columnas de la matriz: ");
-	scanf("%d",&n_columnas);
-	
-	int A[n_filas][n_columnas];
-	int v[n_filas];
-	
-	//Inicializar el vector con 0's para luego poder sumarle
-	for(int i=0; i<n_filas; i++){
-		v[i]=0;
-	}
-	
-	//Ingresar la matriz
+	int dimension;
+	printf("Ingrese el tamano de las %s: ",palabra);
+	scanf("%d",&dimension);
+	return dimension;
+}
+void ingresar_matriz(int filas, int columnas, int **m, int *v){
 	color(0);
 	printf("Ingrese el dato de la matriz A");
 	color(11);
 	printf(" f  c\n");
-	for(int i=0; i<n_filas; i++){
-		for(int j=0; j<n_columnas; j++){
+	
+	for(int i=0; i<filas; i++){
+		for(int j=0; j<columnas; j++){
 			printf("Ingrese el dato de la matriz A[%d][%d]: ",i+1,j+1);
-			scanf("%d",&A[i][j]);
+			scanf("%d",&m[i][j]);
 			
-			//Suman en el arreglo
-			v[i]=v[i]+A[i][j];	
+			v[i]+=m[i][j];	
 		}
 	}
-	//Mostrar matriz
 	printf("\n");
-	for(int i=0; i<n_filas; i++){
+}
+void mostrar_matriz(int filas, int columnas, int **m, int *v){
+	for(int i=0; i<filas; i++){
 		color(15);
 		printf("Fila #%d: ",i+1);
-		for(int j=0; j<n_columnas; j++){
+		for(int j=0; j<columnas; j++){
 			color(11);
-			
-			if(j<n_columnas-1){
-				printf("%d+",A[i][j]);
+			if(j<columnas-1){
+				printf("%d+",m[i][j]);
 			}	else{
-					printf("%d",A[i][j]);
+					printf("%d",m[i][j]);
 				}
-			
 		}
 		color(12);
-		
-		//El arreglo:
+		//El vector:
 		printf(" = | %2d |", v[i]);
 		printf("\n");
 	}
-	
 	color(15);
+}
+main(){
+	int filas=tomar_dimensiones("filas");
+	int columnas=tomar_dimensiones("columnas");
+	
+	int v[filas];
+	
+	int **mA = (int**) malloc(filas * sizeof(int*));
+	for(int i=0; i<filas; i++)
+		mA[i] = (int*) malloc(columnas * sizeof(int));
+		
+	for(int i=0; i<filas; i++)
+		v[i]=0;
+	
+	ingresar_matriz(filas,columnas,mA,v);
+	mostrar_matriz(filas,columnas,mA,v);
 }

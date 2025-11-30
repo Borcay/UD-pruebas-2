@@ -1,84 +1,88 @@
 //Santiago Hernandez Diaz 20252578001
-/*
-10. Diseñe un algoritmo que me ordene los elementos de una matriz.
-*/
+//10. Diseñe un algoritmo que me ordene los elementos de una matriz.
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
-
-//funcion para cambiar color del texto
+//Funcion para cambiar color del texto (no cuenta para las 3)
 void color(int c) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
-
-main(){
-	int n_filas, n_columnas;
-	
-	color(15);
-	printf("Ingrese el tamano de las filas de la matriz: ");
-	scanf("%d",&n_filas);
-	printf("Ingrese el tamano de las columnas de la matriz: ");
-	scanf("%d",&n_columnas);
-	
-	int A[n_filas][n_columnas];
-	int vordenador[n_filas*n_columnas];
-	int k=0;
-	
-	//Ingresar matriz desordenada
+//3 Funciones
+void ingresar_matriz_desordenada(int filas, int columnas, int **m){
 	color(0);
 	printf("Ingrese el dato de la matriz A");
 	color(11);
 	printf(" f  c\n");
-	for(int i=0; i<n_filas; i++){
-		for(int j=0; j<n_columnas; j++){
+	for(int i=0; i<filas; i++){
+		for(int j=0; j<columnas; j++){
 			printf("Ingrese el dato de la matriz A[%d][%d]",i+1,j+1);
-			scanf("%d",&A[i][j]);
+			scanf("%d",&m[i][j]);
 		}
 	}
-	
-	//Poner datos en el vector ordenador
-	for(int i=0; i<n_filas; i++){
-		for(int j=0; j<n_columnas; j++){
-			vordenador[k]=A[i][j];
+}
+void poner_datos_en_vector(int filas, int columnas, int **m, int *v_ordenador){
+	int k=0;
+	for(int i=0; i<filas; i++){
+		for(int j=0; j<columnas; j++){
+			v_ordenador[k]=m[i][j];
 			k++;
 		}
 	}
-	
-	//Ordenar el vector ordenador
+}
+void ordenar_vector(int filas, int columnas, int *v_ordenador){
 	int aux;
-	for(int i=0; i<(n_filas*n_columnas); i++){
-		for(int j=0; j<(n_filas*n_columnas)-1; j++){ //Por razones misteriosas hay que poner -1
-			if(vordenador[j]>vordenador[j+1]){
-			aux=vordenador[j];
-			vordenador[j]=vordenador[j+1];
-			vordenador[j+1]=aux;
+	for(int i=0; i<(filas*columnas); i++){
+		for(int j=0; j<(filas*columnas)-1; j++){ 
+			if(v_ordenador[j]>v_ordenador[j+1]){
+			aux=v_ordenador[j];
+			v_ordenador[j]=v_ordenador[j+1];
+			v_ordenador[j+1]=aux;
 			}	
 		}
 	}
-	
-	//Mostrar matriz desordenada (original)
+}
+void mostrar_matriz_desordenada(int filas, int columnas, int **m){
 	color(12);
 	printf("\nMatriz\n");
-	for(int i=0; i<n_filas; i++){
-		for(int j=0; j<n_columnas; j++){
-			printf("%d ",A[i][j]);
+	for(int i=0; i<filas; i++){
+		for(int j=0; j<columnas; j++){
+			printf("%d ",m[i][j]);
 		}
 		printf("\n");
 	}
-
-	//Rearmar y mostrarla matriz
+}
+void matriz_reorganizada(int filas, int columnas, int **m, int *v_ordenador){
 	color(10);
 	printf("\nMatriz reorganizada\n");
-	k=0;
-	for(int i=0; i<n_filas; i++){
-		for(int j=0; j<n_columnas; j++){
-			A[i][j]=vordenador[k];
+	int k=0;
+	for(int i=0; i<filas; i++){
+		for(int j=0; j<columnas; j++){
+			m[i][j]=v_ordenador[k];
 			k++;
-			printf("%d ",A[i][j]);
+			printf("%d ",m[i][j]);
 		}
 		printf("\n");
 	}
-	
 	color(15);
+}
+main(){
+	int filas, columnas;
+	color(15);
+	printf("Ingrese el tamano de las filas de la matriz: ");
+	scanf("%d",&filas);
+	printf("Ingrese el tamano de las columnas de la matriz: ");
+	scanf("%d",&columnas);
+	
+	int **mA = (int**) malloc(filas * sizeof(int*));
+	for(int i=0; i<filas; i++)
+		mA[i] = (int*) malloc(columnas * sizeof(int));
+		
+	int v_ordenador[filas*columnas];
+	
+	ingresar_matriz_desordenada(filas,columnas,mA);
+	poner_datos_en_vector(filas,columnas,mA,v_ordenador);
+	ordenar_vector(filas,columnas,v_ordenador);
+	mostrar_matriz_desordenada(filas,columnas,mA);
+	matriz_reorganizada(filas,columnas,mA,v_ordenador);
 }
 
